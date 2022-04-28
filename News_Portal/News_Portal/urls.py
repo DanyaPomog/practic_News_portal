@@ -22,5 +22,5 @@ urlpatterns = [
     path('products/', include('simpleapp.urls')),
     path('product/', include('simpleapp.urls')),
     path('news/', include('news.urls')),
-    path('post/', include('news.urls')),
+    path('news/', include('news.urls')),
 ]
