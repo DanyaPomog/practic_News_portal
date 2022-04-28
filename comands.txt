@@ -1,0 +1,93 @@
+from news.models import *
+
+u1 = User.objects.create(username='Dan')  
+
+u2 = User.objects.create(username='Pom') 
+
+a1=Author.objects.create(authorUser=u1) 
+
+a2=Author.objects.create(authorUser=u2)
+
+Category.objects.create(name_category='IT') 
+
+Category.objects.create(name_category='nature') 
+
+Category.objects.create(name_category='science') 
+
+Category.objects.create(name_category='literature') 
+
+Post.objects.create(author=a1, category_type='NW', title='sometitle', text='SomeSoBigTest')
+
+Post.objects.get(title='sometitle').post_category.add(Category.objects.get(name_category='IT')) 
+
+Comment.objects.create(post=Post.objects.get(title='sometitle'), user=u1, text='hate comment') 
+
+Comment.objects.get(text='hate comment').dislike()
+
+Post.objects.get(title='sometitle').like()
+
+Post.objects.get(title='sometitle').like()
+
+Comment.objects.get(text='hate comment').dislike()
+
+Post.objects.create(author=a2, title='Best Title Ever!', text='right now you read the best title in the world!') 
+
+Post.objects.create(author=a1, title='Your Title is Sucking', text='KISS')
+
+Post.objects.get(title='sometitle').post_category.add(Category.objects.get(name_category='IT')) 
+
+Post.objects.get(title='Best Title Ever!').post_category.add(Category.objects.get(name_category='nature')) 
+
+Post.objects.get(title='Best Title Ever!').post_category.add(Category.objects.get(name_category='science')) 
+
+Post.objects.get(title='Your Title is Sucking').post_category.add(Category.objects.get(name_category='literature'))       
+              
+Post.objects.get(title='Your Title is Sucking').post_category.add(Category.objects.get(name_category='nature')) 
+
+Comment.objects.create(post=Post.objects.get(title='Best Title Ever!'), user=u1, text='boolshit') 
+
+Comment.objects.create(post=Post.objects.get(title='Best Title Ever!'), user=u2, text='why do you hate me?') 
+
+Comment.objects.create(post=Post.objects.get(title='Your Title is Sucking'), user=u1, text='This is my truth!!!') 
+
+Post.objects.get(title='Best Title Ever!').dislike() 
+
+Post.objects.get(title='Best Title Ever!').dislike() 
+
+Post.objects.get(title='Your Title is Sucking').like()  
+
+Comment.objects.get(text='boolshit').dislike() 
+
+Comment.objects.get(text='This is my truth!!!').dislike() 
+
+Comment.objects.get(text='This is my truth!!!').like()    
+
+Comment.objects.get(text='This is my truth!!!').like()
+
+Comment.objects.get(text='This is my truth!!!').like()
+
+Comment.objects.get(text='This is my truth!!!').like()
+
+Comment.objects.get(text='This is my truth!!!').like()
+
+Comment.objects.get(text='This is my truth!!!').like()
+
+a1.update_rating() 
+
+a2.update_rating() 
+
+a1.ratingAuthor  
+
+a2.ratingAuthor 
+
+best_post = Post.objects.all().order_by('-rating').values('time_post', 'author', 'rating', 'title', 'text')[0]
+
+best_author = Author.objects.all().order_by('-ratingAuthor').values('authorUser', 'ratingAuthor')[0] 
+
+best_post 
+
+best_author 
+
+best_post_comments = the_post.comment_set.all()
+
+best_post_comments
