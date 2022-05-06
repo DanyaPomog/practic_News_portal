@@ -38,10 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
     'news',
     'simpleapp',
     'django.contrib.flatpages',
     'django.contrib.sites',
+    'django_filters',
 
 ]
 

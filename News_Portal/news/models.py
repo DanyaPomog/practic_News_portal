@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 
 class Author(models.Model):
@@ -18,19 +19,6 @@ class Author(models.Model):
                 self.ratingAuthor += comment.rating
         self.save()
 
-
-
-#    def update_rating(self):
- #       post_rating = self.Post_set.aggregate(postRating=Sum('rating'))
- #       p_rat = 0
- #       p_rat += post_rating.get('postRating')
-#
- #       com_rating = self.authorUser.comment_set.aggregate(commentRating=Sum('rating'))
-  #      c_rat = 0
-   #     c_rat += com_rating.get('commentRating')
-
-#        self.ratingAuthor = p_rat * 3 + c_rat
- #       self.save()
 
 class Category(models.Model):
     name_category = models.CharField(max_length=64, unique=True)
@@ -61,6 +49,9 @@ class Post(models.Model):
                           published on: {self.time_post.strftime('%d/%m/%Y, %H:%M')},\n \
                           the rating of this post is {self.rating}\nPreview: {self.preview()}"
         return post_metadata
+
+    def get_absolute_url(self):
+        return reverse('post_detail', args=[str(self.id)])
 
     def preview(self):
         if len(self.text) > 124:
