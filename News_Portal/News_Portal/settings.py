@@ -44,11 +44,15 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    'news',
-    'simpleapp',
+    #'news',
+   # 'simpleapp',
+   # 'sign',
     'django.contrib.flatpages',
     'django.contrib.sites',
     'django_filters',
+    'news.apps.NewsConfig',
+    'django_apscheduler'
+
 
 ]
 
@@ -139,8 +143,8 @@ STATIC_URL = 'static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
+#DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+DEFAULT_FROM_EMAIL = 'testsetZ@yandex.ru'
 
 STATICFILES_DIRS = [
     BASE_DIR / "static"
@@ -149,11 +153,22 @@ STATICFILES_DIRS = [
 LOGIN_URL = '/accounts/login/'
 SITE_ID = 1
 
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'testsetZ'
+EMAIL_HOST_PASSWORD = 'wdswmukjgqgtfaog'
+EMAIL_USE_TSL = True
+
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_UNIQUE_EMAIL = True
-ACCOUNT_USERNAME_REQUIRED = False
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_AUTHENTIFICATION_METHOD = 'email'
 
+ADMINS = [
+    ('danya', 'testsetZ@yandex.ru')
+]
+SERVER_EMAIL = 'testsetZ@yandex.ru'
 
-ACCOUNT_FORMS = {'signup': 'sign.models.BasicSignupForm'}
+FROM_EMAIL = 'danpom@yandex.com'
+EMAIL_ADMIN = 'testsetZ@yandex.ru'
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f^s a"
+APSCHEDULER_RUN_NOW_TIMEOUT = 25

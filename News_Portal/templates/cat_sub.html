@@ -1,0 +1,38 @@
+{% extends 'flatpages/default.html' %}
+{% load custom_tags %}
+{% load custom_filters %}
+{% block title %} подписка на категорию {% endblock title %}
+
+{% block content %}
+<html>
+<h2> выберите категорию для подписки: </h2>
+{% for name in category_detail %}
+<form action = "{% url 'subscribe_to_category' name.id %}" method = 'POST'>
+    {% csrf_token %}
+    <h4>
+    <a href="{% url 'subscribe_to_category' name.id %} " >
+      <button class="pure-button button-success" style="border-radius: 15px" >
+         <i class="bi bi-bookmark-plus"  ></i>
+          Subscribe to {{ name }}
+         </button>
+        </a>
+    </h4>
+</form>
+    {% endfor %}
+<h2> выберите категорию для отписки: </h2>
+{% for name in category_detail %}
+<form action = "{% url 'unsubscribe_from_category' name.id %}" method = 'POST'>
+    {% csrf_token %}
+    <h4>
+    <a href="{% url 'unsubscribe_from_category' name.id %} " >
+      <button class="pure-button button-success" style="border-radius: 15px" >
+         <i class="bi bi-bookmark-plus"  ></i>
+          Unsubscribe to {{ name }}
+         </button>
+          </a>
+</a>
+    </h4>
+</form>
+    {% endfor %}
+</html>
+{% endblock %}

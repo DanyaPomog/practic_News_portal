@@ -14,13 +14,14 @@ news
        <td>Заголовок</td>
        <td>Текст публикации</td>
        <td>Время публикации</td>
-
+       <td>категория публикации</td>
    </tr>
 
    <tr>
        <td>{{ post.title | censor }}</td>
        <td>{{ post.text | censor }}</td>
        <td>{{ post.time_post|date:'d M Y' }}</td>
+       <td>{{ postcategory.category.id }}</td>
    </tr>
 
 </table>

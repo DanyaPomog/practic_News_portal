@@ -25,6 +25,7 @@ news
                <td>Заголовок</td>
                <td>Время публикации</td>
                <td>Текст публикации</td>
+               <td>Категория</td>
            </tr>
 
            {% for post in news %}
@@ -32,9 +33,9 @@ news
                <td>{{ post.title | censor }}</td>
                <td>{{ post.time_post|date:'M d Y' }}</td>
                <td>{{ post.text | truncatechars:20 | censor }}</td>
+               <td>{{ post.cat }}</td>
            </tr>
            {% endfor %}
-
        </table>
    {% else %}
        <h2>Новостей нет!</h2>
