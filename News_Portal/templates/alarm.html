@@ -11,7 +11,7 @@
       <p>В категории:
         <strong>{{ category_name }}</strong> есть новый пост от:
         <strong>"{{ subscriber_user }}"</strong>.
-        <q>{{ posts|truncatechars:50 }}</q>
+        <q>{{ post|truncatechars:50 }}</q>
         </p>
       <p><strong>Чтобы узнать больше нажмите кнопку</strong></p>
 <a href="http://{{ port }}/news/{{ pk_id }}">Читать далее</a>

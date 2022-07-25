@@ -152,43 +152,6 @@ class UserUpdate(UpdateView):
     success_url = reverse_lazy('news_list')
 
 
-class AppointmentView(View):
-    def get(self, request, *args, **kwargs):
-        return render(request, 'alarm.html', {})
-
-    def post(self, request, *args, **kwargs):
-        appointment = Appointment(
-            date=datetime.strptime(request.POST['date'], '%Y-%m-%d'),
-            client_name=request.POST['client_name'],
-            message=request.POST['message'],
-        )
-        appointment.save()
-
-        html_content = render_to_string(
-            'alarm.html',
-            {
-                'appointment': appointment,
-            }
-        )
-
-        mail_admins(
-            subject=f'{appointment.client_name} {appointment.date.strftime("%d %m %Y")}',
-            message=appointment.message,
-        )
-
-        msg = EmailMultiAlternatives(
-            subject=f'{appointment.client_name} {appointment.date.strftime("%Y-%M-%d")}',
-            body=appointment.message,
-            from_email='testsetZ@yandex.ru',
-            to=['testsetZ@yandex.ru'],
-        )
-        msg.attach_alternative(html_content, "text/html")  # добавляем html
-
-        msg.send()  # отсылаем
-
-        return redirect('appointments:make_appointment')
-
-
 class BaseRegisterView(CreateView):
     model = User
     form_class = BaseRegisterForm

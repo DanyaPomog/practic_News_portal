@@ -14,19 +14,17 @@ from News_Portal.settings import DEFAULT_FROM_EMAIL
 
 @receiver(m2m_changed, sender = PostCategory)
 def message_to_sub(sender, instance, action, **kwargs):
-    global subscribe
     if action == 'post_add':
         for cat in instance.post_category.all():
             for subscribe in CategorySubscribers.objects.filter(category_sub=cat):
-                print(subscribe)
 
                 msg = EmailMultiAlternatives(
                     subject=instance.title,
                     body=instance.text,
-                    from_email='testsetZ@yandex.ru',
+                    from_email=DEFAULT_FROM_EMAIL,
                     to=[subscribe.subscriber_user.email],
                 )
-                print(f'{subscribe.subscriber_user.email} почта пописчика')
+                print(f'{subscribe.subscriber_user.email} почта пописчика {subscribe}')
 
                 port = sys.argv[-2]
 
@@ -52,11 +50,11 @@ def message_to_sub(sender, instance, action, **kwargs):
 
 
 def get_email_sub(CategorySubscribers):
-    email_revipients = []
+    email_recipients = []
     for user in subscriber_user:
-        email_revipients.append(user.email)
-        print(email_revipients)
-    return email_revipients
+        email_recipients.append(user.email)
+        print(email_recipients)
+    return email_recipients
 
 
 def send_emails(post_object, *args, **kwargs):
@@ -125,7 +123,7 @@ def week_post_2():
             print(f'set(post.cats.all()) = {set(post.post_category.all())}')
 
             send_mail(
-                post_object,
+                #post_object,
                 category_object = category_object,
                 email_subject = email_subject,
                 template = template,

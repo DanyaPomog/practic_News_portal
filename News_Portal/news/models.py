@@ -56,12 +56,6 @@ class CategorySubscribers(models.Model):
     subscriber_user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     category_sub = models.ForeignKey(Category, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return f'{self.subscriber_user} подписан на категорию {self.category_sub}'
-
-    class Meta:
-        verbose_name = 'Категория подписки'
-        verbose_name_plural = 'Категории подписок'
 
 class Post(models.Model):
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
